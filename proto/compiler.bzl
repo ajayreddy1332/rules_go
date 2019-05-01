@@ -143,7 +143,7 @@ def _go_proto_compiler_impl(ctx):
             options = ctx.attr.options,
             suffix = ctx.attr.suffix,
             go_protoc = ctx.executable._go_protoc,
-            protoc = ctx.executable._protoc,
+            protoc = ctx.executable.protoc,
             plugin = ctx.executable.plugin,
             valid_archive = ctx.attr.valid_archive,
             import_path_option = ctx.attr.import_path_option,
@@ -171,7 +171,7 @@ go_proto_compiler = go_rule(
             cfg = "host",
             default = "@io_bazel_rules_go//go/tools/builders:go-protoc",
         ),
-        "_protoc": attr.label(
+        "protoc": attr.label(
             executable = True,
             cfg = "host",
             default = "@com_google_protobuf//:protoc",
