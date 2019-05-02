@@ -83,7 +83,7 @@ def go_proto_compile(go, compiler, protos, imports, importpath):
             compiler.protoc,
             compiler.plugin,
 #         ], transitive_descriptor_sets),
-        ]
+        ]),
         outputs = go_srcs,
         progress_message = "Generating into %s" % go_srcs[0].dirname,
         mnemonic = "GoProtocGen",
