@@ -64,7 +64,7 @@ def go_proto_compile(go, compiler, protos, imports, importpath):
 
     args = go.actions.args()
 #     args.add("-protoc", compiler.protoc)
-    args.add("-protoc", "/tmp/myprotoc")
+    args.add("-protoc", "/tmp/my_protoc")
     args.add("-importpath", importpath)
     args.add("-out_path", outpath)
     args.add("-plugin", compiler.plugin)
