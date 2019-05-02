@@ -63,7 +63,8 @@ def go_proto_compile(go, compiler, protos, imports, importpath):
     transitive_descriptor_sets = depset(direct = [], transitive = desc_sets)
 
     args = go.actions.args()
-    args.add("-protoc", compiler.protoc)
+#     args.add("-protoc", compiler.protoc)
+    args.add("-protoc", "/tmp/myprotoc")
     args.add("-importpath", importpath)
     args.add("-out_path", outpath)
     args.add("-plugin", compiler.plugin)
