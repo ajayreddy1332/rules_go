@@ -166,7 +166,7 @@ go_proto_compiler = go_rule(
             allow_single_file = True,
             executable = True,
             cfg = "host",
-            default = "@com_github_golang_protobuf//protoc-gen-go",
+            #default = "@com_github_golang_protobuf//protoc-gen-go",
         ),
         "_go_protoc": attr.label(
             executable = True,
