@@ -176,7 +176,7 @@ go_proto_compiler = go_rule(
         "protoc": attr.label(
             executable = True,
             cfg = "host",
-            default = "@com_google_protobuf//:protoc",
+            default = "@com_github_google_protobuf//:protoc",
         ),
     },
 )
