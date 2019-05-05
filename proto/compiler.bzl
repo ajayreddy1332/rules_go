@@ -63,7 +63,8 @@ def go_proto_compile(go, compiler, protos, imports, importpath):
     transitive_descriptor_sets = depset(direct = [], transitive = desc_sets)
 
     args = go.actions.args()
-    args.add("-protoc", compiler.protoc)
+#     args.add("-protoc", compiler.protoc)
+    args.add("-protoc", "/tmp/my_protoc")
     args.add("-importpath", importpath)
     args.add("-out_path", outpath)
     args.add("-plugin", compiler.plugin)
@@ -73,7 +74,7 @@ def go_proto_compile(go, compiler, protos, imports, importpath):
     args.add_all(compiler.options, before_each = "-option")
     if compiler.import_path_option:
         args.add_all([importpath], before_each = "-option", format_each = "import_path=%s")
-    args.add_all(transitive_descriptor_sets, before_each = "-descriptor_set")
+#     args.add_all(transitive_descriptor_sets, before_each = "-descriptor_set")
     args.add_all(go_srcs, before_each = "-expected")
     args.add_all(imports, before_each = "-import")
     args.add_all(proto_paths.keys())
@@ -82,7 +83,8 @@ def go_proto_compile(go, compiler, protos, imports, importpath):
             compiler.go_protoc,
             compiler.protoc,
             compiler.plugin,
-        ], transitive_descriptor_sets),
+#         ], transitive_descriptor_sets),
+        ]),
         outputs = go_srcs,
         progress_message = "Generating into %s" % go_srcs[0].dirname,
         mnemonic = "GoProtocGen",
@@ -143,7 +145,7 @@ def _go_proto_compiler_impl(ctx):
             options = ctx.attr.options,
             suffix = ctx.attr.suffix,
             go_protoc = ctx.executable._go_protoc,
-            protoc = ctx.executable._protoc,
+            protoc = ctx.executable.protoc,
             plugin = ctx.executable.plugin,
             valid_archive = ctx.attr.valid_archive,
             import_path_option = ctx.attr.import_path_option,
@@ -171,10 +173,10 @@ go_proto_compiler = go_rule(
             cfg = "host",
             default = "@io_bazel_rules_go//go/tools/builders:go-protoc",
         ),
-        "_protoc": attr.label(
+        "protoc": attr.label(
             executable = True,
             cfg = "host",
-            default = "@com_google_protobuf//:protoc",
+            default = "@com_github_google_protobuf//:protoc",
         ),
     },
 )
