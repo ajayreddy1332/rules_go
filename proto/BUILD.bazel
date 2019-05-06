@@ -13,9 +13,9 @@ go_proto_compiler(
 go_proto_compiler(
     name = "go_proto",
     visibility = ["//visibility:public"],
-#     deps = [
-#         "@com_github_golang_protobuf//proto:go_default_library",
-#     ] + WELL_KNOWN_TYPE_RULES.values(),
+    deps = [
+        "@com_github_golang_protobuf//proto:go_default_library",
+    ] + WELL_KNOWN_TYPE_RULES.values(),
 )
 
 go_proto_compiler(
