@@ -16,7 +16,6 @@ WELL_KNOWN_TYPE_PACKAGES = {
     "timestamp": ("github.com/golang/protobuf/ptypes/timestamp", []),
     "type": ("google.golang.org/genproto/protobuf/ptype", ["any", "source_context"]),
     "wrappers": ("github.com/golang/protobuf/ptypes/wrappers", []),
-    "any": ("manageability/ems/third_party", []),
 }
 
 GOGO_WELL_KNOWN_TYPE_REMAPS = [
