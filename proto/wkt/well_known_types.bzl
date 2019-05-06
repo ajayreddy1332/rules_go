@@ -20,7 +20,7 @@ WELL_KNOWN_TYPE_PACKAGES = {
     "api": ("manageability/ems/third_party", ["source_context", "type"]),
 #     "compiler_plugin": ("manageability/ems/third_party", []),
     "descriptor": ("manageability/ems/third_party", []),
-    "duration": ("manageability/ems/third_party", []),
+#     "duration": ("manageability/ems/third_party", []),
     "empty": ("manageability/ems/third_party", []),
     "field_mask": ("manageability/ems/third_party", []),
     "source_context": ("manageability/ems/third_party", []),
