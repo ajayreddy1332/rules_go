@@ -18,7 +18,7 @@ WELL_KNOWN_TYPE_PACKAGES = {
 #     "wrappers": ("github.com/golang/protobuf/ptypes/wrappers", []),
     "any": ("manageability/ems/third_party", []),
     "api": ("manageability/ems/third_party", ["source_context", "type"]),
-    "compiler_plugin": ("manageability/ems/third_party", ["descriptor"]),
+    "compiler_plugin": ("manageability/ems/third_party", []),
     "descriptor": ("manageability/ems/third_party", []),
     "duration": ("manageability/ems/third_party", []),
     "empty": ("manageability/ems/third_party", []),
