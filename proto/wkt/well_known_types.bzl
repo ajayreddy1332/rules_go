@@ -4,7 +4,7 @@ _proto_library_suffix = "proto"
 _go_proto_library_suffix = "go_proto"
 
 WELL_KNOWN_TYPE_PACKAGES = {
-#     "any": ("github.com/golang/protobuf/ptypes/any", []),
+    "any": ("github.com/golang/protobuf/ptypes/any", []),
 #     "api": ("google.golang.org/genproto/protobuf/api", ["source_context", "type"]),
 #     "compiler_plugin": ("github.com/golang/protobuf/protoc-gen-go/plugin", ["descriptor"]),
 #     "descriptor": ("github.com/golang/protobuf/protoc-gen-go/descriptor", []),
