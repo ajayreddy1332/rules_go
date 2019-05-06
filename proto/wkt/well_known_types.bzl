@@ -38,7 +38,7 @@ def gen_well_known_types():
         go_proto_library(
             name = rule.rsplit(":", 1)[1],
 #             compilers = ["@io_bazel_rules_go//proto:go_grpc"],
-            importpath = gopackage,
+            importpath = go_package,
             proto = "@com_github_google_protobuf//:{}_{}".format(wkt, _proto_library_suffix),
             visibility = ["//visibility:public"],
             deps = [WELL_KNOWN_TYPE_RULES[dep] for dep in deps],
