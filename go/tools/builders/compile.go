@@ -137,6 +137,8 @@ func run(args []string) error {
 			return err
 		}
 		defer os.Remove(importcfgName)
+	} else {
+		importcfgName := ""
 	}
 
 	// If there are assembly files, and this is go1.12+, generate symbol ABIs.
