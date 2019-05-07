@@ -96,6 +96,7 @@ func run(args []string) error {
 	}
 
 	doImportCfg := sdkSupportsImportCfg()
+	importcfgName := ""
 	if doImportCfg {
 		// Build an importcfg file.
 		importcfgName, err := buildImportcfgFile(archives, *packageList, goenv.installSuffix, filepath.Dir(*outFile))
@@ -103,8 +104,6 @@ func run(args []string) error {
 			return err
 		}
 		defer os.Remove(importcfgName)
-	} else {
-		importcfgName := ""
 	}
 
 	// generate any additional link options we need
