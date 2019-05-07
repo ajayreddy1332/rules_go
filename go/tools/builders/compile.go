@@ -130,11 +130,14 @@ func run(args []string) error {
 	}
 
 	// Build an importcfg file for the compiler.
-	importcfgName, err := buildImportcfgFile(archives, stdImports, goenv.installSuffix, filepath.Dir(*output))
-	if err != nil {
-		return err
+	doImportCfg := sdkSupportsImportCfg()
+	if doImportCfg {
+		importcfgName, err := buildImportcfgFile(archives, stdImports, goenv.installSuffix, filepath.Dir(*output))
+		if err != nil {
+			return err
+		}
+		defer os.Remove(importcfgName)
 	}
-	defer os.Remove(importcfgName)
 
 	// If there are assembly files, and this is go1.12+, generate symbol ABIs.
 	symabisName, err := buildSymabisFile(goenv, sFiles, hFiles, *asmhdr)
@@ -148,7 +151,9 @@ func run(args []string) error {
 	// Compile the filtered files.
 	goargs := goenv.goTool("compile")
 	goargs = append(goargs, "-p", *packagePath)
-	goargs = append(goargs, "-importcfg", importcfgName)
+	if doImportCfg {
+		goargs = append(goargs, "-importcfg", importcfgName)
+	}
 	goargs = append(goargs, "-pack", "-o", *output)
 	if symabisName != "" {
 		goargs = append(goargs, "-symabis", symabisName)
@@ -163,7 +168,11 @@ func run(args []string) error {
 		filenames = append(filenames, f.filename)
 	}
 	goargs = append(goargs, filenames...)
-	absArgs(goargs, []string{"-I", "-o", "-trimpath", "-importcfg"})
+	if doImportCfg {
+		absArgs(goargs, []string{"-I", "-o", "-trimpath", "-importcfg"})
+	} else {
+		absArgs(goargs, []string{"-I", "-o", "-trimpath"})
+	}
 	cmd := exec.Command(goargs[0], goargs[1:]...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -177,7 +186,9 @@ func run(args []string) error {
 	if *nogo != "" {
 		var nogoargs []string
 		nogoargs = append(nogoargs, "-p", *packagePath)
-		nogoargs = append(nogoargs, "-importcfg", importcfgName)
+		if doImportCfg {
+			nogoargs = append(nogoargs, "-importcfg", importcfgName)
+		}
 		for _, imp := range stdImports {
 			nogoargs = append(nogoargs, "-stdimport", imp)
 		}
@@ -211,6 +222,23 @@ func run(args []string) error {
 		fmt.Fprintln(os.Stderr, nogoOutput.String())
 	}
 	return nil
+}
+
+func sdkSupportsImportCfg() bool {
+	version := runtime.Version()
+	if strings.HasPrefix(version, "go1.") {
+		minor := version[len("go1."):]
+		if i := strings.IndexByte(minor, '.'); i >= 0 {
+			minor = minor[:i]
+		}
+		n, err := strconv.Atoi(minor)
+		if err == nil && n <= 8 {
+			return false
+		}
+		// Fall through if the version can't be parsed. It's probably a newer
+		// development version.
+	}
+	return true
 }
 
 func main() {
