@@ -131,14 +131,13 @@ func run(args []string) error {
 
 	// Build an importcfg file for the compiler.
 	doImportCfg := sdkSupportsImportCfg()
+	importcfgName := ""
 	if doImportCfg {
 		importcfgName, err := buildImportcfgFile(archives, stdImports, goenv.installSuffix, filepath.Dir(*output))
 		if err != nil {
 			return err
 		}
 		defer os.Remove(importcfgName)
-	} else {
-		importcfgName := ""
 	}
 
 	// If there are assembly files, and this is go1.12+, generate symbol ABIs.
