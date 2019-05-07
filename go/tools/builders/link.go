@@ -94,16 +94,21 @@ func run(args []string) error {
 		}
 	}
 
-	// Build an importcfg file.
-	importcfgName, err := buildImportcfgFile(archives, *packageList, goenv.installSuffix, filepath.Dir(*outFile))
-	if err != nil {
-		return err
+	doImportCfg := sdkSupportsImportCfg()
+	if doImportCfg {
+		// Build an importcfg file.
+		importcfgName, err := buildImportcfgFile(archives, *packageList, goenv.installSuffix, filepath.Dir(*outFile))
+		if err != nil {
+			return err
+		}
+		defer os.Remove(importcfgName)
 	}
-	defer os.Remove(importcfgName)
 
 	// generate any additional link options we need
 	goargs := goenv.goTool("link")
-	goargs = append(goargs, "-importcfg", importcfgName)
+	if doImportCfg {
+		goargs = append(goargs, "-importcfg", importcfgName)
+	}
 	for _, xdef := range xstamps {
 		split := strings.SplitN(xdef, "=", 2)
 		if len(split) != 2 {
@@ -135,6 +140,23 @@ func run(args []string) error {
 	}
 
 	return nil
+}
+
+func sdkSupportsImportCfg() bool {
+	version := runtime.Version()
+	if strings.HasPrefix(version, "go1.") {
+		minor := version[len("go1."):]
+		if i := strings.IndexByte(minor, '.'); i >= 0 {
+			minor = minor[:i]
+		}
+		n, err := strconv.Atoi(minor)
+		if err == nil && n <= 8 {
+			return false
+		}
+		// Fall through if the version can't be parsed. It's probably a newer
+		// development version.
+	}
+	return true
 }
 
 func buildImportcfgFile(archives []archive, packageList, installSuffix, dir string) (string, error) {
