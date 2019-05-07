@@ -103,6 +103,8 @@ func run(args []string) error {
 			return err
 		}
 		defer os.Remove(importcfgName)
+	} else {
+		importcfgName := ""
 	}
 
 	// generate any additional link options we need
