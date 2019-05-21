@@ -233,7 +233,7 @@ func sdkSupportsImportCfg() bool {
 			minor = minor[:i]
 		}
 		n, err := strconv.Atoi(minor)
-		if err == nil && n <= 8 {
+		if err == nil && n <= 9 {
 			return false
 		}
 		// Fall through if the version can't be parsed. It's probably a newer
