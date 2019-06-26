@@ -7,7 +7,7 @@ _go_library_suffix = "go_default_library"
 WELL_KNOWN_TYPE_PACKAGES = {
     "any": ("github.com/golang/protobuf/ptypes/any", []),
     "api": ("google.golang.org/genproto/protobuf/api", ["source_context", "type"]),
-    "compiler_plugin": ("github.com/golang/protobuf/protoc-gen-go/plugin", ["descriptor"]),
+    # "compiler_plugin": ("github.com/golang/protobuf/protoc-gen-go/plugin", ["descriptor"]),
     "descriptor": ("github.com/golang/protobuf/protoc-gen-go/descriptor", []),
     "duration": ("github.com/golang/protobuf/ptypes/duration", []),
     "empty": ("github.com/golang/protobuf/ptypes/empty", []),
