@@ -29,8 +29,8 @@ GOGO_WELL_KNOWN_TYPE_REMAPS = [
 ]
 
 WELL_KNOWN_TYPE_RULES = {
-    wkt: "@io_bazel_rules_go//proto/wkt:{}_{}".format(wkt, _go_proto_library_suffix)
-    # wkt: "@com_github_golang_protobuf_2//ptypes/{}:{}".format(wkt, _go_library_suffix)
+    # wkt: "@io_bazel_rules_go//proto/wkt:{}_{}".format(wkt, _go_proto_library_suffix)
+    wkt: "@com_github_golang_protobuf_2//ptypes/{}:{}".format(wkt, _go_library_suffix)
     for wkt in WELL_KNOWN_TYPE_PACKAGES.keys()
 }
 
@@ -38,11 +38,13 @@ def gen_well_known_types():
     for wkt, rule in WELL_KNOWN_TYPE_RULES.items():
         (go_package, deps) = WELL_KNOWN_TYPE_PACKAGES[wkt]
         go_proto_library(
-            name = rule.rsplit(":", 1)[1],
-            compilers = ["@io_bazel_rules_go//proto:go_proto_bootstrap"],
+            # name = rule.rsplit(":", 1)[1],
+            name = "rules_go_proto",
+            # compilers = ["@io_bazel_rules_go//proto:go_proto_bootstrap"],
             importpath = go_package,
             # proto = "@com_google_protobuf//:{}_{}".format(wkt, _proto_library_suffix),
             proto = "@com_github_google_protobuf//:{}_{}".format(wkt, _proto_library_suffix),
             visibility = ["//visibility:public"],
-            deps = [WELL_KNOWN_TYPE_RULES[dep] for dep in deps],
+            # deps = [WELL_KNOWN_TYPE_RULES[dep] for dep in deps],
+            deps = [rule.rsplit(":", 1)[1]] + [WELL_KNOWN_TYPE_RULES[dep] for dep in deps],
         )
