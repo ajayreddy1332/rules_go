@@ -173,7 +173,7 @@ go_proto_compiler = go_rule(
             cfg = "host",
             default = "@io_bazel_rules_go//go/tools/builders:go-protoc",
         ),
-        "_protoc": attr.label(
+        "protoc": attr.label(
             executable = True,
             cfg = "host",
             default = "@com_github_google_protobuf//:protoc",
