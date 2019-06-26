@@ -2,6 +2,7 @@ load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 
 _proto_library_suffix = "proto"
 _go_proto_library_suffix = "go_proto"
+_go_library_suffix = "go_default_library"
 
 WELL_KNOWN_TYPE_PACKAGES = {
     "any": ("github.com/golang/protobuf/ptypes/any", []),
@@ -28,7 +29,9 @@ GOGO_WELL_KNOWN_TYPE_REMAPS = [
 ]
 
 WELL_KNOWN_TYPE_RULES = {
-    wkt: "@io_bazel_rules_go//proto/wkt:{}_{}".format(wkt, _go_proto_library_suffix)
+    # wkt: "@io_bazel_rules_go//proto/wkt:{}_{}".format(wkt, _go_proto_library_suffix)
+    # @com_github_golang_protobuf_2//ptypes/any:go_default_library
+    wkt: "@com_github_golang_protobuf_2//ptypes/{}:{}".format(wkt, _go_library_suffix)
     for wkt in WELL_KNOWN_TYPE_PACKAGES.keys()
 }
 
