@@ -6,16 +6,16 @@ _go_library_suffix = "go_default_library"
 
 WELL_KNOWN_TYPE_PACKAGES = {
     "any": ("github.com/golang/protobuf/ptypes/any", []),
-    # "api": ("google.golang.org/genproto/protobuf/api", ["source_context", "type"]),
-    # "compiler_plugin": ("github.com/golang/protobuf/protoc-gen-go/plugin", ["descriptor"]),
-    # "descriptor": ("github.com/golang/protobuf/protoc-gen-go/descriptor", []),
+    "api": ("google.golang.org/genproto/protobuf/api", ["source_context", "type"]),
+    "compiler_plugin": ("github.com/golang/protobuf/protoc-gen-go/plugin", ["descriptor"]),
+    "descriptor": ("github.com/golang/protobuf/protoc-gen-go/descriptor", []),
     "duration": ("github.com/golang/protobuf/ptypes/duration", []),
     "empty": ("github.com/golang/protobuf/ptypes/empty", []),
-    # "field_mask": ("google.golang.org/genproto/protobuf/field_mask", []),
-    # "source_context": ("google.golang.org/genproto/protobuf/source_context", []),
+    "field_mask": ("google.golang.org/genproto/protobuf/field_mask", []),
+    "source_context": ("google.golang.org/genproto/protobuf/source_context", []),
     "struct": ("github.com/golang/protobuf/ptypes/struct", []),
     "timestamp": ("github.com/golang/protobuf/ptypes/timestamp", []),
-    # "type": ("google.golang.org/genproto/protobuf/ptype", ["any", "source_context"]),
+    "type": ("google.golang.org/genproto/protobuf/ptype", ["any", "source_context"]),
     "wrappers": ("github.com/golang/protobuf/ptypes/wrappers", []),
 }
 
