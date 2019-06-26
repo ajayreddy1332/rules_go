@@ -145,7 +145,7 @@ def _go_proto_compiler_impl(ctx):
             options = ctx.attr.options,
             suffix = ctx.attr.suffix,
             go_protoc = ctx.executable._go_protoc,
-            protoc = ctx.executable._protoc,
+            protoc = ctx.executable.protoc,
             plugin = ctx.executable.plugin,
             valid_archive = ctx.attr.valid_archive,
             import_path_option = ctx.attr.import_path_option,
