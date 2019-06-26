@@ -22,6 +22,7 @@ go_proto_compiler(
     name = "go_grpc",
     options = ["plugins=grpc"],
     visibility = ["//visibility:public"],
+    protoc = "@com_github_google_protobuf//:protoc",
     deps = [
         "@com_github_golang_protobuf_2//proto:go_default_library",
         "@org_golang_google_grpc//:go_default_library",
