@@ -6,8 +6,7 @@ go_proto_compiler(
     name = "go_proto_bootstrap",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_golang_protobuf//proto:go_default_library",
-        # "@com_github_golang_protobuf_2//proto:go_default_library",
+        "@com_github_golang_protobuf_2//proto:go_default_library",
     ],
 )
 
@@ -15,8 +14,7 @@ go_proto_compiler(
     name = "go_proto",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_golang_protobuf//proto:go_default_library",
-        # "@com_github_golang_protobuf_2//proto:go_default_library",
+        "@com_github_golang_protobuf_2//proto:go_default_library",
     ] + WELL_KNOWN_TYPE_RULES.values(),
 )
 
@@ -24,11 +22,9 @@ go_proto_compiler(
     name = "go_grpc",
     options = ["plugins=grpc"],
     visibility = ["//visibility:public"],
-    protoc = "@com_github_google_protobuf//:protoc",
     deps = [
-        # "@com_github_golang_protobuf_2//proto:go_default_library",
-        "@com_github_golang_protobuf//proto:go_default_library",
-        # "@org_golang_google_grpc//:go_default_library",
+        "@com_github_golang_protobuf_2//proto:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
         "@org_golang_x_net//context:go_default_library",
     ] + WELL_KNOWN_TYPE_RULES.values(),
 )
@@ -40,7 +36,7 @@ go_proto_compiler(
     valid_archive = False,
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_golang_protobuf//proto:go_default_library",
+        "@com_github_golang_protobuf_2//proto:go_default_library",
     ],
 )
 
@@ -72,7 +68,7 @@ go_proto_compiler(
     plugin = "@com_github_gogo_protobuf//protoc-gen-gofast",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_golang_protobuf//proto:go_default_library",
+        "@com_github_golang_protobuf_2//proto:go_default_library",
     ] + WELL_KNOWN_TYPE_RULES.values(),
 )
 
