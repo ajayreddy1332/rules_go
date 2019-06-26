@@ -5,6 +5,7 @@ load("//proto/wkt:well_known_types.bzl", "GOGO_WELL_KNOWN_TYPE_REMAPS", "WELL_KN
 go_proto_compiler(
     name = "go_proto_bootstrap",
     visibility = ["//visibility:public"],
+    protoc = "@com_github_google_protobuf//:protoc",
     deps = [
         "@com_github_golang_protobuf_2//proto:go_default_library",
     ],
@@ -13,6 +14,7 @@ go_proto_compiler(
 go_proto_compiler(
     name = "go_proto",
     visibility = ["//visibility:public"],
+    protoc = "@com_github_google_protobuf//:protoc",
     deps = [
         "@com_github_golang_protobuf_2//proto:go_default_library",
     ] + WELL_KNOWN_TYPE_RULES.values(),
@@ -25,13 +27,13 @@ go_proto_compiler(
     protoc = "@com_github_google_protobuf//:protoc",
     deps = [
         "@com_github_golang_protobuf_2//proto:go_default_library",
-        "@org_golang_google_grpc//:go_default_library",
         "@org_golang_x_net//context:go_default_library",
     ] + WELL_KNOWN_TYPE_RULES.values(),
 )
 
 go_proto_compiler(
     name = "go_proto_validate",
+    protoc = "@com_github_google_protobuf//:protoc",
     plugin = "@com_github_mwitkow_go_proto_validators//protoc-gen-govalidators",
     suffix = ".validator.pb.go",
     valid_archive = False,
@@ -54,6 +56,7 @@ GOGO_VARIANTS = [
 [go_proto_compiler(
     name = variant + "_proto",
     options = GOGO_WELL_KNOWN_TYPE_REMAPS,
+    protoc = "@com_github_google_protobuf//:protoc",
     plugin = "@com_github_gogo_protobuf//protoc-gen-" + variant,
     visibility = ["//visibility:public"],
     deps = [
@@ -67,6 +70,7 @@ GOGO_VARIANTS = [
 go_proto_compiler(
     name = "gofast_proto",
     plugin = "@com_github_gogo_protobuf//protoc-gen-gofast",
+    protoc = "@com_github_google_protobuf//:protoc",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_golang_protobuf_2//proto:go_default_library",
@@ -77,6 +81,7 @@ go_proto_compiler(
     name = variant + "_grpc",
     options = ["plugins=grpc"] + GOGO_WELL_KNOWN_TYPE_REMAPS,
     plugin = "@com_github_gogo_protobuf//protoc-gen-" + variant,
+    protoc = "@com_github_google_protobuf//:protoc",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_gogo_protobuf//gogoproto:go_default_library",
@@ -92,6 +97,7 @@ go_proto_compiler(
     name = "gofast_grpc",
     options = ["plugins=grpc"],
     plugin = "@com_github_gogo_protobuf//protoc-gen-gofast",
+    protoc = "@com_github_google_protobuf//:protoc",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_golang_protobuf//proto:go_default_library",
